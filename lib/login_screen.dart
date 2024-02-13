@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multiroleapp/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -8,6 +9,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final emailController = TextEditingController();
+  final ageController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              controller: emailController,
               decoration: InputDecoration(
                 hintText: 'Email',
               ),
@@ -26,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              controller: passwordController,
               decoration: InputDecoration(
                 hintText: 'Password',
               ),
@@ -35,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              controller: ageController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: 'Age',
@@ -45,7 +52,13 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: InkWell(
-              onTap: (){
+              onTap: ()async{
+                SharedPreferences sp = await SharedPreferences.getInstance();
+                sp.setString('email', emailController.toString());
+                sp.setString('password', passwordController.toString());
+                sp.setString('age', ageController.toString());
+
+
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
               },
               child: Container(
