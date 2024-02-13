@@ -54,18 +54,20 @@ class _LoginScreenState extends State<LoginScreen> {
             child: InkWell(
               onTap: ()async{
                 SharedPreferences sp = await SharedPreferences.getInstance();
-                sp.setString('email', emailController.toString());
-                sp.setString('password', passwordController.toString());
-                sp.setString('age', ageController.toString());
+                sp.setString('email', emailController.text.toString());
+                sp.setString('age', ageController.text.toString());
+                sp.setBool('isLogin', true);
+
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
 
 
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
               },
               child: Container(
                 height: 60,
                 width: double.infinity,
                 color: Colors.blue,
                 child: Center(child: Text('Login', style: TextStyle(color: Colors.white),)),
+
               ),
             ),
           )
