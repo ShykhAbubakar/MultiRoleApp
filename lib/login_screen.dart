@@ -12,15 +12,24 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final ageController = TextEditingController();
   final passwordController = TextEditingController();
+  final studentController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Center(child: Text('Login', style: TextStyle(color: Colors.white),)),
+        backgroundColor: Colors.blue,
+
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
+            child:
+            TextFormField(
               controller: emailController,
               decoration: InputDecoration(
                 hintText: 'Email',
@@ -48,6 +57,15 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: studentController,
+              decoration: InputDecoration(
+                hintText: 'Student',
+              ),
+            ),
+          ),
           SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -56,6 +74,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 SharedPreferences sp = await SharedPreferences.getInstance();
                 sp.setString('email', emailController.text.toString());
                 sp.setString('age', ageController.text.toString());
+                sp.setString('age', studentController.text.toString());
+
                 sp.setBool('isLogin', true);
 
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));

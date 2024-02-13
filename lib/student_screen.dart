@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:multiroleapp/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class StudentScreen extends StatefulWidget {
+  const StudentScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<StudentScreen> createState() => _StudentScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _StudentScreenState extends State<StudentScreen> {
   String email = '';
   String age = '';
-  String student = '';
   @override
   void initState() {
     // TODO: implement initState
@@ -21,9 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   loadData()async{
     SharedPreferences sp = await SharedPreferences.getInstance();
-        email = sp.getString('email') ?? '';
+    email = sp.getString('email') ?? '';
     age = sp.getString('age') ?? '';
-    student = sp.getString('student') ?? '';
     setState(() {
 
     });
@@ -37,9 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
         automaticallyImplyLeading: false,
         title: Center(
             child: Text(
-          'Home Screen',
-          style: TextStyle(color: Colors.white),
-        )),
+              'Home Screen',
+              style: TextStyle(color: Colors.white),
+            )),
         backgroundColor: Colors.blue,
       ),
       body: Column(
@@ -69,27 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Age'),
+                child: Text('Password'),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(age.toString()),
               ),
-
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text('User Role'),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(student.toString()),
-              ),
-
             ],
           ),
           SizedBox(height: 40,),
@@ -100,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SharedPreferences sp = await SharedPreferences.getInstance();
 
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()));
+                    MaterialPageRoute(builder: (context) => StudentScreen()));
               },
               child: Container(
                 height: 60,
@@ -108,9 +89,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.blue,
                 child: Center(
                     child: Text(
-                  'Logout',
-                  style: TextStyle(color: Colors.white),
-                )),
+                      'Logout',
+                      style: TextStyle(color: Colors.white),
+                    )),
               ),
             ),
           )
@@ -118,4 +99,5 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
+  }
+
